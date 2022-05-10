@@ -52,6 +52,30 @@ _shodan(){
           ;;
       esac
       ;;
+    alert)
+      case $prev in
+        domain)
+          COMPREPLY=( $( compgen -W '--triggers' -- "$cur"))
+          return
+          ;;
+        download)
+          COMPREPLY=( $( compgen -W '--alert-id' -- "$cur"))
+          return
+          ;;
+        export)
+          COMPREPLY=( $( compgen -W '--filename' -- "$cur"))
+          return
+          ;;
+        list)
+          COMPREPLY=( $( compgen -W '--expired' -- "$cur"))
+          return
+          ;;
+        stats)
+          COMPREPLY=( $( compgen -W '--limit -O --filename' -- "$cur"))
+          return
+          ;;
+      esac
+      ;;
   esac
 
 
@@ -95,6 +119,10 @@ _shodan(){
                      --alert --countries --custom-filters --ports --tags --vulns
                      --limit --compresslevel --timeout --color --no-color 
                      --quite' -- "$cur"))   
+      ;;
+    alert)
+      COMPREPLY=( $( compgen -W 'clear create disable domain download enable export
+                     import info list remove stats triggers' -- "$cur"))
       ;;
   esac
   
